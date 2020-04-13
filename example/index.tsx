@@ -3,15 +3,18 @@ import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import { useToggle } from '../.';
 
+const UseToggleExample = ({ value, toggleValue }) => (
+  <>
+    <h1>{`The value is ${value}`}</h1>
+    <button onClick={toggleValue} />
+  </>
+);
+
 const App = () => {
-  const [value, setValue, toggleValue] = useToggle();
-  console.log('toggleValue:', toggleValue);
-  console.log('setValue:', setValue);
-  console.log('value:', value);
+  const [value, _, toggleValue] = useToggle();
   return (
     <div style={{ height: '100vh', width: '100wv' }}>
-      <h1>{`The value is ${value}`}</h1>
-      <button onClick={toggleValue} />
+      <UseToggleExample value={value} toggleValue={toggleValue} />
     </div>
   );
 };
