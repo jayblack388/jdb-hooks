@@ -10,10 +10,10 @@ export const useHover = () => {
   const [hovered, setIsHovered] = useState(false);
 
   const ref = useRef<HTMLElement>(null);
-  
+
   const handleMouseOver = () => setIsHovered(true);
   const handleMouseOut = () => setIsHovered(false);
-  
+
   useEffect(
     () => {
       const node = ref.current;
@@ -28,7 +28,7 @@ export const useHover = () => {
         }
       };
     },
-    [ref.current] // Recall only if node changes
+    [ref] // Recall only if node changes
   );
 
   return [ref, hovered];
