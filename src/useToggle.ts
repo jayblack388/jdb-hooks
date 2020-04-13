@@ -1,10 +1,11 @@
 import { useCallback, useState } from 'react';
 
 /**
- * Returns a useState hook and a memoized toggle function as a third item in the array
+ * Acts as a `useState` hook would, but will also return a
+ * `useCallback` wrapped toggle function.
  *
  * @param  {Boolean} initialState
- * @returns a `useState` hook as well as a memoized toggle
+ * @returns [`value`, `setValue`, `toggleValue`]
  */
 
 export const useToggle = (initialState = false) => {
