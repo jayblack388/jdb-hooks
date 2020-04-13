@@ -1,6 +1,12 @@
 import * as React from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import { Home, useHover, useOnClickOutside, useToggle } from '../pages';
+import {
+  Home,
+  useHover,
+  useOnClickOutside,
+  usePrevious,
+  useToggle,
+} from '../pages';
 import { Nav } from '../';
 import * as S from './styles';
 
@@ -18,6 +24,7 @@ export const Layout = () => (
               path="/useOnClickOutside"
               component={useOnClickOutside}
             />
+            <Route exact path="/usePrevious" component={usePrevious} />
             <Route exact path="/useToggle" component={useToggle} />
             <Route path="/" component={Home} />
           </Switch>

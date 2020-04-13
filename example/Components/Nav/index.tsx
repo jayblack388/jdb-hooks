@@ -2,18 +2,16 @@ import * as React from 'react';
 import { Link } from 'react-router-dom';
 import * as S from './styles';
 
+const links = ['useHover', 'useOnClickOutside', 'usePrevious', 'useToggle'];
+
 export const Nav = () => (
   <S.Nav>
     <S.NavLinks>
-      <S.NavLink>
-        <Link to="useHover">useHover</Link>
-      </S.NavLink>
-      <S.NavLink>
-        <Link to="useToggle">useToggle</Link>
-      </S.NavLink>
-      <S.NavLink>
-        <Link to="useOnClickOutside">useOnClickOutside</Link>
-      </S.NavLink>
+      {links.map(x => (
+        <S.NavLink key={x}>
+          <Link to={x}>{x}</Link>
+        </S.NavLink>
+      ))}
     </S.NavLinks>
   </S.Nav>
 );
