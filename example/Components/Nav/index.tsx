@@ -11,6 +11,9 @@ export const Nav = () => (
       <S.NavLink>
         <Link to="useToggle">useToggle</Link>
       </S.NavLink>
+      <S.NavLink>
+        <Link to="useOnClickOutside">useOnClickOutside</Link>
+      </S.NavLink>
     </S.NavLinks>
   </S.Nav>
 );
