@@ -1,3 +1,4 @@
+export { useAsync } from './useAsync';
 export { useDarkMode } from './useDarkMode';
 export { useHover } from './useHover';
 export { useLocalStorage } from './useLocalStorage';

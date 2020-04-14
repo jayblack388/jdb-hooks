@@ -12,6 +12,7 @@ export const Layout = () => (
         <Nav />
         <S.ContentContainer>
           <Switch>
+            <Route exact path="/useAsync" component={P.useAsync} />
             <Route exact path="/useDarkMode" component={P.useDarkMode} />
             <Route exact path="/useHover" component={P.useHover} />
             <Route
