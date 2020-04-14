@@ -1,4 +1,5 @@
 export { default as Home } from './Home';
+export { useDarkMode } from './useDarkMode';
 export { useHover } from './useHover';
 export { useLocalStorage } from './useLocalStorage';
 export { useMedia } from './useMedia';

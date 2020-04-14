@@ -1,3 +1,4 @@
+export { useDarkMode } from './useDarkMode';
 export { useHover } from './useHover';
 export { useLocalStorage } from './useLocalStorage';
 export { useMedia, useLayoutMedia } from './useMedia';

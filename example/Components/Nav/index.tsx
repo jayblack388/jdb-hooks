@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import * as S from './styles';
 
 const links = [
+  'useDarkMode',
   'useHover',
   'useLocalStorage',
   'useMedia',
