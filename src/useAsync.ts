@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useState } from 'react';
-type AsyncFunc = () => Promise<boolean>;
+type AsyncFunc = () => Promise<unknown>;
 /**
  * Wraps an asynchronous function to provide stateful `loading`, `error` and
  * `response`. Also provides an `execute` function that wraps the passed
