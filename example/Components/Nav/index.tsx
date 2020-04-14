@@ -5,6 +5,7 @@ import * as S from './styles';
 const links = [
   'useHover',
   'useLocalStorage',
+  'useMedia',
   'useOnClickOutside',
   'usePrevious',
   'useToggle',

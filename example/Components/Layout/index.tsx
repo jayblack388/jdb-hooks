@@ -18,6 +18,7 @@ export const Layout = () => (
               path="/useLocalStorage"
               component={P.useLocalStorage}
             />
+            <Route exact path="/useMedia" component={P.useMedia} />
             <Route
               exact
               path="/useOnClickOutside"

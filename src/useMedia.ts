@@ -1,48 +1,84 @@
-import { useEffect, useState } from 'react';
+import {
+  DependencyList,
+  EffectCallback,
+  useEffect,
+  useLayoutEffect,
+  useState,
+} from 'react';
 
-/**
- * Hook to utilize media queries in component logic. Sets
- * listeners on each passed of the passed `queries`
- *
- * @param  {String[]} queries
- * @param  {Number[] | Boolean[]} values
- * @param  {Number | Boolean} defaultValue
- * @returns `value`
- */
+type Effect = (effect: EffectCallback, deps?: DependencyList) => void;
+type MediaQueryObject = { [key: string]: string | number | boolean };
 
-export const useMedia = (
-  queries: string[],
-  values: number[] | boolean[],
-  defaultValue: number | boolean
-) => {
-  if (window === undefined) return defaultValue;
-  // Array containing a media query list for each query
-  const mediaQueryLists = queries.map(q => window.matchMedia(q));
-
-  // Function that gets value based on matching media query
-  const getValue = () => {
-    // Get index of first media query that matches
-    const index = mediaQueryLists.findIndex(mql => mql.matches);
-    // Return related value or defaultValue if none
-    return typeof values[index] !== 'undefined' ? values[index] : defaultValue;
-  };
-
-  // State and setter for matched value
-  const [value, setValue] = useState(getValue);
-
-  useEffect(
-    () => {
-      // Event listener callback
-      // Note: By defining getValue outside of useEffect we ensure that it has current
-      // values of hook args (as this hook callback is created once on mount).
-      const handler = () => setValue(getValue);
-      // Set a listener for each media query with above handler as callback.
-      mediaQueryLists.forEach(mql => mql.addListener(handler));
-      // Remove listeners on cleanup
-      return () => mediaQueryLists.forEach(mql => mql.removeListener(handler));
-    },
-    [] // Empty array ensures effect is only run on mount and unmount
-  );
-
-  return value;
+function noop() {}
+const mockMediaQueryList: MediaQueryList = {
+  media: '',
+  matches: false,
+  onchange: noop,
+  addListener: noop,
+  addEventListener: noop,
+  removeListener: noop,
+  removeEventListener: noop,
+  dispatchEvent: (_: Event) => true,
 };
+
+function camelToHyphen(camelString: string) {
+  return camelString
+    .replace(/[A-Z]/g, string => `-${string.toLowerCase()}`)
+    .toLowerCase();
+}
+const QUERY_COMBINATOR = ' and ';
+
+function queryObjectToString(query: string | MediaQueryObject) {
+  if (typeof query === 'string') {
+    return query;
+  }
+
+  return Object.entries(query)
+    .map(([feature, value]) => {
+      const convertedFeature = camelToHyphen(feature);
+      let convertedValue = value;
+
+      if (typeof convertedValue === 'boolean') {
+        return convertedValue ? convertedFeature : `not ${convertedFeature}`;
+      }
+
+      if (
+        typeof convertedValue === 'number' &&
+        /[height|width]$/.test(convertedFeature)
+      ) {
+        convertedValue = `${convertedValue}px`;
+      }
+
+      return `(${convertedFeature}: ${convertedValue})`;
+    })
+    .join(QUERY_COMBINATOR);
+}
+
+const createUseMedia = (effect: Effect) => (
+  rawQuery: string | MediaQueryObject,
+  defaultState = false
+) => {
+  const [state, setState] = useState(defaultState);
+  const query = queryObjectToString(rawQuery);
+  effect(() => {
+    let mounted = true;
+    const mediaQueryList: MediaQueryList =
+      typeof window === 'undefined'
+        ? mockMediaQueryList
+        : window.matchMedia(query);
+    const onChange = () => {
+      if (!mounted) return;
+      setState(Boolean(mediaQueryList.matches));
+    };
+    mediaQueryList.addListener(onChange);
+    setState(mediaQueryList.matches);
+    return () => {
+      mounted = false;
+      mediaQueryList.removeListener(onChange);
+    };
+  }, [query]);
+  return state;
+};
+
+export const useMedia = createUseMedia(useEffect);
+export const useLayoutMedia = createUseMedia(useLayoutEffect);
