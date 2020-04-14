@@ -1,12 +1,6 @@
 import * as React from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import {
-  Home,
-  useHover,
-  useOnClickOutside,
-  usePrevious,
-  useToggle,
-} from '../pages';
+import * as P from '../pages';
 import { Nav } from '../';
 import * as S from './styles';
 
@@ -18,15 +12,20 @@ export const Layout = () => (
         <Nav />
         <S.ContentContainer>
           <Switch>
-            <Route exact path="/useHover" component={useHover} />
+            <Route exact path="/useHover" component={P.useHover} />
+            <Route
+              exact
+              path="/useLocalStorage"
+              component={P.useLocalStorage}
+            />
             <Route
               exact
               path="/useOnClickOutside"
-              component={useOnClickOutside}
+              component={P.useOnClickOutside}
             />
-            <Route exact path="/usePrevious" component={usePrevious} />
-            <Route exact path="/useToggle" component={useToggle} />
-            <Route path="/" component={Home} />
+            <Route exact path="/usePrevious" component={P.usePrevious} />
+            <Route exact path="/useToggle" component={P.useToggle} />
+            <Route path="/" component={P.Home} />
           </Switch>
         </S.ContentContainer>
       </Router>

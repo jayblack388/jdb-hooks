@@ -2,7 +2,13 @@ import * as React from 'react';
 import { Link } from 'react-router-dom';
 import * as S from './styles';
 
-const links = ['useHover', 'useOnClickOutside', 'usePrevious', 'useToggle'];
+const links = [
+  'useHover',
+  'useLocalStorage',
+  'useOnClickOutside',
+  'usePrevious',
+  'useToggle',
+];
 
 export const Nav = () => (
   <S.Nav>
