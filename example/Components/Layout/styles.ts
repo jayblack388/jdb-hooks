@@ -19,4 +19,7 @@ export const ContentContainer = styled.section`
   overflow-y: auto;
   padding: 0.75rem 1.25rem;
   width: 85vw;
+  @media only screen and (max-width: 960px) {
+    width: 75vw;
+  }
 `;

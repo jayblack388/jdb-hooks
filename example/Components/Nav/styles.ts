@@ -5,6 +5,9 @@ export const Nav = styled.nav`
   height: 100%;
   padding: 0.75rem 2rem;
   width: 15vw;
+  @media only screen and (max-width: 960px) {
+    width: 25vw;
+  }
 `;
 export const NavLinks = styled.ul`
   margin: 0;
@@ -16,7 +19,7 @@ export const NavLink = styled.li`
   margin-bottom: 1rem;
   padding: 0%;
   a {
-    color: #eF00AA;
+    color: #ef00aa;
     text-decoration: none;
   }
 `;
