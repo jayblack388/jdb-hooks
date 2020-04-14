@@ -2,14 +2,22 @@ import { useEffect } from 'react';
 import { useLocalStorage } from './useLocalStorage';
 import { useMedia } from './useMedia';
 
+type DarkModeHandler = (enabled: boolean) => void;
+
 /**
  * Compose `useMedia` to detect dark mode preference
  *
- * @returns a `ref` as well as an `isHovered` value
+ * @returns `true`/`false` based on OS dark mode setting
  */
 const usePrefersDarkMode = () => {
   return useMedia('(prefers-color-scheme: dark)', false);
 };
+
+/**
+ * Adds or removes `dark-mode` class to DOM `body`
+ *
+ * @param  {Boolean} enabled
+ */
 
 const defaultHandler = (enabled: boolean) => {
   const className = 'dark-mode';
@@ -22,27 +30,27 @@ const defaultHandler = (enabled: boolean) => {
 };
 
 /**
- * Returns a ref to attach to a DOM element and whether it is currently hovered
- *
- * @returns a `ref` as well as an `isHovered` value
+ * Creates a local storage backed dark mode state and setState. Uses `useMedia`
+ * to determine if client's OS prefers dark mode.
+ * @param  {DarkModeHandler} handler
+ * @returns [`darkModeEnabled`, `setDarkModeEnabled`]
  */
 
-export const useDarkMode = (handler = defaultHandler) => {
+export const useDarkMode = (handler: DarkModeHandler = defaultHandler) => {
   // See if user has set a browser or OS preference for dark mode.
   const prefersDarkMode = usePrefersDarkMode();
-  console.log('prefersDarkMode:', prefersDarkMode);
   // Use our useLocalStorage hook to persist state through a page refresh.
-  const [enabledState, setEnabledState] = useLocalStorage(
+  const [enabledState, setDarkModeEnabled] = useLocalStorage(
     'dark-mode-enabled',
     false
   );
-  const enabled =
+  const darkModeEnabled =
     typeof enabledState !== 'undefined' ? enabledState : prefersDarkMode;
 
   useEffect(() => {
-    handler(enabled);
-  }, [enabled]);
-  return [enabled, setEnabledState];
+    handler(darkModeEnabled);
+  }, [darkModeEnabled]);
+  return [darkModeEnabled, setDarkModeEnabled];
 };
 
 export default useDarkMode;
