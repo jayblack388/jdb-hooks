@@ -5,7 +5,13 @@ export const Global = createGlobalStyle`
     box-sizing: border-box;
   }
   body {
+    background: #fff;
+    color: #000;
     margin: 0;
+    &.dark-mode {
+      background: #000;
+      color: #fff;
+    }
   }
 `;
 
