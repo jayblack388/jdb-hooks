@@ -5,8 +5,11 @@ export const Nav = styled.nav`
   height: 100%;
   padding: 0.75rem 2rem;
   width: 15vw;
-  @media only screen and (max-width: 960px) {
+  @media only screen and (max-width: 1200px) {
     width: 25vw;
+  }
+  @media only screen and (max-width: 720px) {
+    width: 35vw;
   }
 `;
 export const NavLinks = styled.ul`
