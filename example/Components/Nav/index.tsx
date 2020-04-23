@@ -4,6 +4,7 @@ import * as S from './styles';
 
 const links = [
   'useAsync',
+  'useCookie',
   'useDarkMode',
   'useHover',
   'useLocalStorage',
