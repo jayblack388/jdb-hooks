@@ -11,6 +11,7 @@ const links = [
   'useOnClickOutside',
   'usePrevious',
   'useToggle',
+  'useWindowWidth',
 ];
 
 export const Nav = () => (
