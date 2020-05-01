@@ -8,7 +8,9 @@ import { useCallback, useState } from 'react';
  * @returns [`value`, `setValue`, `toggleValue`]
  */
 
-export const useToggle = (initialState = false) => {
+export const useToggle = (
+  initialState = false
+): [boolean, React.Dispatch<React.SetStateAction<boolean>>, () => void] => {
   const [value, setValue] = useState(initialState);
   const toggleValue = useCallback(() => setValue(prevValue => !prevValue), [
     setValue,
