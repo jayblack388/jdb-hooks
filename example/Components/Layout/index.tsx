@@ -28,6 +28,7 @@ export const Layout = () => (
             />
             <Route exact path="/usePrevious" component={P.usePrevious} />
             <Route exact path="/useToggle" component={P.useToggle} />
+            <Route exact path="/useWindowWidth" component={P.useWindowWidth} />
             <Route path="/" component={P.Home} />
           </Switch>
         </S.ContentContainer>
