@@ -49,8 +49,8 @@ export const useDarkMode = (handler: DarkModeHandler = defaultHandler) => {
 
   useEffect(() => {
     handler(darkModeEnabled);
-  }, [darkModeEnabled]);
-  return [darkModeEnabled, setDarkModeEnabled];
+  }, [darkModeEnabled, handler]);
+  return [darkModeEnabled, handler, setDarkModeEnabled];
 };
 
 export default useDarkMode;

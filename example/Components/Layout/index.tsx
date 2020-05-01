@@ -13,6 +13,7 @@ export const Layout = () => (
         <S.ContentContainer>
           <Switch>
             <Route exact path="/useAsync" component={P.useAsync} />
+            <Route exact path="/useCookie" component={P.useCookie} />
             <Route exact path="/useDarkMode" component={P.useDarkMode} />
             <Route exact path="/useHover" component={P.useHover} />
             <Route
